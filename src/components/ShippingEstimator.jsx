@@ -75,7 +75,9 @@ const ShippingEstimator = () => {
       });
 
       const distance = res.data.data;
-      console.log(typeof weight, typeof type);
+
+      if(!distance || distance <= 0) 
+        toast.error(res.data.message || "Invalid distance received, Check your inputs");
 
       const cost = Number(
         calculateShippingCost(distance, Number(weight), type).toFixed(2)
@@ -118,7 +120,7 @@ const ShippingEstimator = () => {
       toast.success("Estimate calculated successfully!");
     } catch (error) {
       console.error("Error fetching distance:", error);
-      toast.error("Failed to calculate estimate, Please try again");
+      toast.error(error.response?.data?.message || "Failed to calculate estimate, Please try again");
       setEstimateResult({ error: "Failed to get estimate, Please try again" });
     } finally {
       setLoading(false);
@@ -142,14 +144,14 @@ const ShippingEstimator = () => {
             label="Origin"
             value={origin}
             onChange={setOrigin}
-            placeholder="e.g., New York City"
+            placeholder="e.g., Mumbai"
             error={errors.origin}
           />
           <LocationInput
             label="Destination"
             value={destination}
             onChange={setDestination}
-            placeholder="e.g., Los Angeles"
+            placeholder="e.g., Kolkata"
             error={errors.destination}
           />
           <WeightInput

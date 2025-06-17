@@ -20,9 +20,6 @@ export default function WeightInput({ weight, onChange, error }) {
         onChange={(e) => onChange(e.target.value)}
         className={cn(error && "border-destructive")}
       />
-      <p className="text-sm text-muted-foreground">
-        Enter the total weight of your package in kilograms.
-      </p>
       {error && <p className="text-destructive text-sm mt-1">{error}</p>}
     </div>
   );

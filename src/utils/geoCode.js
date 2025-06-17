@@ -12,6 +12,6 @@ export const geoCode = async (place) => {
     }
   );
 
-  const coords = res.data.features[0].geometry.coordinates;
+  const coords = res.data.features[0]?.geometry.coordinates;
   return coords; // [lng, lat]
 };

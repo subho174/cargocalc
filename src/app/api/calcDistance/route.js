@@ -9,6 +9,12 @@ export async function POST(req) {
     const originCoords = await geoCode(origin);
     const destinationCoords = await geoCode(destination);
 
+    if (!originCoords || !destinationCoords)
+      return NextResponse.json(
+        { message: "Invalid origin or destination" },
+        { status: 400 }
+      );
+      
     const response = await axios.post(
       "https://api.openrouteservice.org/v2/matrix/driving-car",
       {

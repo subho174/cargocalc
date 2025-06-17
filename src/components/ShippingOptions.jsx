@@ -26,9 +26,6 @@ export default function ShippingOptions({ type, onChange, error }) {
           <SelectItem value="express">Express (Faster, Higher Cost)</SelectItem>
         </SelectContent>
       </Select>
-      <p className="text-sm text-muted-foreground">
-        Choose the desired speed and cost for your shipment.
-      </p>
       {error && <p className="text-destructive text-sm mt-1">{error}</p>}
     </div>
   );
