@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 export default function ExpenseFormulaCard() {
   const [type, setType] = useState("standard");
 
+  // expense formulas for different shipping types 
   const formulas = {
     standard: {
       base: 5,

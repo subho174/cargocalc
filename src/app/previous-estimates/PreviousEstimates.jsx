@@ -19,10 +19,12 @@ const PreviousEstimates = () => {
   const [estimates, setEstimates] = useState([]);
 
   useEffect(() => {
+    // getting previous estimates stored in sessionStorage
     const storedEstimates = sessionStorage.getItem("shipping_estimates");
     if (storedEstimates) {
       try {
         const parsedEstimates = JSON.parse(storedEstimates);
+        // Sorting estimates so that newer comes first
         setEstimates(parsedEstimates.sort((a, b) => b.timestamp - a.timestamp));
       } catch (error) {
         console.error("Error parsing estimates from session storage:", error);
@@ -31,6 +33,7 @@ const PreviousEstimates = () => {
     }
   }, []);
 
+  // function to clear stored estimates
   const handleClearEstimates = () => {
     sessionStorage.removeItem("shipping_estimates");
     setEstimates([]);

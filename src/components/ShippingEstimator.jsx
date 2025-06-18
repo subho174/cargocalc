@@ -31,6 +31,8 @@ const ShippingEstimator = () => {
   const [loading, setLoading] = useState(false);
   const [estimateResult, setEstimateResult] = useState(null);
 
+  // function to vailidate form inputs
+  // returns true or false
   const validateForm = () => {
     const newErrors = {};
 
@@ -57,6 +59,7 @@ const ShippingEstimator = () => {
     return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
+  // function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,6 +72,7 @@ const ShippingEstimator = () => {
     setEstimateResult(null);
 
     try {
+      // fetching distance using the API
       const res = await axios.post("/api/calcDistance", {
         origin,
         destination,
@@ -79,11 +83,12 @@ const ShippingEstimator = () => {
       if(!distance || distance <= 0) 
         toast.error(res.data.message || "Invalid distance received, Check your inputs");
 
+      // calculating shipping cost based on distance, weight, and type
       const cost = Number(
         calculateShippingCost(distance, Number(weight), type).toFixed(2)
       );
 
-      // Save to sessionStorage
+      // Saving estimate to sessionStorage
       const estimate = {
         origin,
         destination,
@@ -111,6 +116,8 @@ const ShippingEstimator = () => {
           estimatedDelivery = "3-7 days";
           break;
       }
+
+      //saving current estimate
       setEstimateResult({
         cost,
         delivery: estimatedDelivery,

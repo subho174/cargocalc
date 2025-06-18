@@ -6,6 +6,7 @@ export async function POST(req) {
   const { origin, destination } = await req.json();
 
   try {
+    // fetching coordinates based on input locations
     const originCoords = await geoCode(origin);
     const destinationCoords = await geoCode(destination);
 
@@ -15,6 +16,7 @@ export async function POST(req) {
         { status: 400 }
       );
       
+      // fetching distance between fetched coordinates
     const response = await axios.post(
       "https://api.openrouteservice.org/v2/matrix/driving-car",
       {
@@ -35,6 +37,7 @@ export async function POST(req) {
         { message: "Failed to fetch distance" },
         { status: 400 }
       );
+      
     return NextResponse.json(
       { data: distance, message: "Distance fetched successfully" },
       { status: 200 }

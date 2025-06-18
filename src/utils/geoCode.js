@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export const geoCode = async (place) => {
+  // Function to get coordinates of a location using OpenRouteService API
+  // returns an array containing longitude and latitude respectively;
+  
   const res = await axios.get(
     "https://api.openrouteservice.org/geocode/search",
     {
