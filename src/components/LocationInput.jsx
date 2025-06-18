@@ -20,7 +20,8 @@ export default function LocationInput({ label, value, onChange, placeholder, err
         onChange={(e) => onChange(e.target.value)}
         className={cn(error && "border-destructive")} // to highlight error
       />
-      {error && <p className="text-destructive text-sm mt-1">{error}</p>} // displaying error
+      {/* displaying error */}
+      {error && <p className="text-destructive text-sm mt-1">{error}</p>}
     </div>
   );
 }

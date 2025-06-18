@@ -18,8 +18,9 @@ export default function WeightInput({ weight, onChange, error }) {
         min="0.1"
         value={weight}
         onChange={(e) => onChange(e.target.value)}
-        className={cn(error && "border-destructive")}
+        className={cn(error && "border-destructive")} // to highlight error
       />
+      {/* displaying error */}
       {error && <p className="text-destructive text-sm mt-1">{error}</p>}
     </div>
   );
